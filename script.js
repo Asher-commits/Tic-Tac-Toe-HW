@@ -89,9 +89,102 @@ function handleCellClick(event){
 function checkForWinnerOrDraw(){
     let winner = "";
 
-    if(winner !== ""){
-        statusText.textContent = `Player ${currentPlayer} wins`;
-        gameActive = false;
+    // X win conditions
 
-    }
+    if(cell1 === "X" && cell2 === "X" && cell3 === "X"){
+        winner = "X"
+    }else if(cell1 === "X" && cell4 === "X" && cell7 === "X"){
+        winner = "X"
+    }else if(cell4 === "X" && cell5 === "X" && cell6 === "X"){
+        winner = "X"
+     } else if(cell2 === "X" && cell5 === "X" && cell8 === "X"){
+        winner = "X"
+        } else if(cell7 === "X" && cell8 === "X" && cell9 === "X"){
+        winner = "X"
+        } else if(cell3 === "X" && cell6 === "X" && cell9 === "X"){
+        winner = "X"
+        } else if(cell1 === "X" && cell5 === "X" && cell9 === "X"){
+        winner = "X"
+        } else if(cell3 === "X" && cell5 === "X" && cell7 === "X"){
+        winner = "X"
+
+    // O win conditions
+
+        }else if(cell1 === "O" && cell2 === "O" && cell3 === "O"){
+        winner = "O"
+        }else if(cell1 === "O" && cell4 === "O" && cell7 === "O"){
+        winner = "O"
+        }else if(cell4 === "O" && cell5 === "O" && cell6 === "O"){
+        winner = "O"
+        } else if(cell2 === "O" && cell5 === "O" && cell8 === "O"){
+        winner = "O"
+        } else if(cell7 === "O" && cell8 === "O" && cell9 === "O"){
+        winner = "O"
+        } else if(cell3 === "O" && cell6 === "O" && cell9 === "O"){
+        winner = "O"
+        } else if(cell1 === "O" && cell5 === "O" && cell9 === "O"){
+        winner = "O"
+        } else if(cell3 === "O" && cell5 === "O" && cell7 === "O"){
+        winner = "O"
+        }
+
+        if(winner !== ""){
+            statusText.textContent = `"Player ${currentPlayer} wins!"`
+            gameActive = false;
+            return;
+        }
+
+        // check draw
+        if(cell1 !== "" && cell2 !== "" && cell3 !== "" &&
+        cell4 !== "" && cell5 !== "" && cell6 !== "" &&
+        cell7 !== "" && cell8 !== "" && cell9 !== ""){
+            statusText.textContent = "It's a draw!"
+            gameActive = false;
+            return;
+        }
+
+        if(currentPlayer === "X"){
+            currentPlayer = "O"
+        }else{
+            currentPlayer = "X"
+        }
+
+        updateStatusText()
+
+} 
+
+
+// Reset game
+
+function resetGame(){
+     cell1 = ""
+     cell2 = ""
+     cell3 = ""
+     cell4 = ""
+     cell5 = ""
+     cell6 = ""
+     cell7 = ""
+     cell8 = ""
+     cell9 = ""
+
+    currentPlayer = "X"
+    gameActive = true;
+
+    cells.forEach(function(cell){
+    cell.textContent = "";
+    })
+
+    statusText.textContent = `"Player ${currentPlayer} wins!"`;
+
+
 }
+
+// Attach event listeners
+cells.forEach(function(cell){
+    cell.addEventListener("click", handleCellClick);
+})
+
+
+resetBtn.addEventListener("click", resetGame);
+
+updateStatusText();
