@@ -174,7 +174,7 @@ function resetGame(){
     cell.textContent = "";
     })
 
-    statusText.textContent = `"Player ${currentPlayer} wins!"`;
+    statusText.textContent = `New game, let's go! Player X's turn`;
 
 
 }
